@@ -1,14 +1,26 @@
 'use strict';
 
-module.exports.hello = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
+const todosCreate = require('./todos-create.js');
+const todosReadAll = require('./todos-read-all.js');
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+module.exports.create = (event, context, callback) => {
+  todosCreate(event, (error, result) => {
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify(result),
+    };
+
+    context.succeed(response);
+  })
+};
+
+module.exports.readAll = (event, context, callback) => {
+  todosReadAll(event, (error, result) => {
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify(result),
+    };
+
+    context.succeed(response);
+  });
 };

@@ -72,6 +72,10 @@ functions:
     handler: handler.create
     events:
       - http: POST todos
+  readAll:
+      handler: handler.readAll
+      events:
+      - http: GET todos
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

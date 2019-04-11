@@ -5,8 +5,17 @@ export class Hello extends React.Component {
     super(props);
     this.state = {
       hello: 'hello',
-      test: 1
+      test: 1,
+      todos: null,
     }
+  }
+
+  componentDidMount = () => {
+    fetch('https://z9k504z994.execute-api.us-east-1.amazonaws.com/dev/todos')
+    .then(response => response.json())
+    .then(data => this.setState({
+      todos: data,
+    }))
   }
 
   // handleHeightChange = (event) => {
@@ -14,6 +23,7 @@ export class Hello extends React.Component {
   // };
 
   render() {
+    console.log(this.state.todos);
     return (
       <h1>{this.state.hello}</h1>
     )
